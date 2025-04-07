@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "stack": "cpp",
+        "memory_resource": "cpp"
+    }
+}
