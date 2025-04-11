@@ -15,5 +15,5 @@ int main(){
     Arv tree = createTreeFromArray(arr, sizeof(arr) / sizeof(arr[0]));
 
     printTreeVisual(tree);
-    printf("Número de Folhas: %d", leafs(n1));
+    printf("Número de Folhas: %d", leafs(tree));
 }
