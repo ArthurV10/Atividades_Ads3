@@ -52,3 +52,87 @@ SELECT * FROM HOSPEDAGEM;
 INSERT INTO HOSPEDAGEM VALUES(16, 5, 2, 2, '2025-12-02', '2026-12-02');
 INSERT INTO HOSPEDAGEM VALUES(17, 5, 2, 2, '2024-12-02', '2027-12-02');
 
+/* Questão 7:  Categoria cujo nome tenha comprimento superior a 15 caracteres. 
+*/
+
+SELECT NOME FROM CATEGORIA WHERE LENGTH(NOME) > 15;
+
+/* Questão 8: Número dos apartamentos ocupados no ano de 2017 com o respectivo nome da sua 
+categoria.  
+*/
+
+SELECT HOSP.NUM_AP, NOME FROM APARTAMENTO APTO
+JOIN CATEGORIA CAT ON APTO.COD_CAT = CAT.COD_CAT
+JOIN HOSPEDAGEM HOSP ON HOSP.NUM_AP = APTO.NUM_AP
+WHERE DT_ENT BETWEEN '2017-01-01' AND '2017-12-31';
+
+/* Questão 10: Crie a tabela funcionário com as atributos: cod_func, nome, dt_nascimento e salário. 
+Depois disso, acrescente o cod_func como chave estrangeira nas tabelas hospedagem e 
+reserva.  
+*/
+
+-- Está tudo feito dentro de SOURCE_CODE (GITHUB) -- 
+
+/* Questão 11:  Mostre o nome e o salário de cada funcionário.  Extraordinariamente, cada funcionário 
+receberá um acréscimo neste salário de 10 reais para cada hospedagem realizada. 
+*/
+
+SELECT FUNC.NOME, FUNC.SALARIO + (10 * COUNT(*)) AS "Salario Final"
+FROM FUNCIONARIO FUNC 
+LEFT JOIN HOSPEDAGEM HOSP ON FUNC.COD_FUNC = HOSP.COD_FUNC
+GROUP BY FUNC.NOME, FUNC.SALARIO;
+
+/* Questão 12: Listagem das categorias cadastradas e para aquelas que possuem apartamentos, relacionar 
+também o número do apartamento, ordenada pelo nome da categoria e pelo número do 
+apartamento. 
+*/
+
+SELECT CAT.NOME, APTO.NUM_AP 
+FROM CATEGORIA CAT
+LEFT JOIN APARTAMENTO APTO ON CAT.COD_CAT = APTO.COD_CAT
+ORDER BY CAT.NOME, APTO.NUM_AP;
+
+/* Questão 13:  Listagem das categorias cadastradas e para aquelas que possuem apartamentos, relacionar 
+também o número do apartamento, ordenada pelo nome da categoria e pelo número do 
+apartamento. Para aquelas que não possuem apartamentos associados, escrever "não possui 
+apartamento". 
+*/
+
+SELECT CAT.NOME AS CATEGORIA, 
+COALESCE(CAST(APTO.NUM_AP AS VARCHAR), 'Não possui apartamento') AS APARTAMENTO
+FROM CATEGORIA CAT
+LEFT JOIN APARTAMENTO APTO ON CAT.COD_CAT = APTO.COD_CAT
+ORDER BY CAT.NOME, APTO.NUM_AP;
+
+/* Questão 14: O nome dos funcionário que atenderam o João (hospedando ou reservando) ou que 
+hospedaram ou reservaram apartamentos da categoria luxo.  
+*/
+
+SELECT DISTINCT FUNC.NOME FROM FUNCIONARIO FUNC
+JOIN HOSPEDAGEM HOSPEDA ON FUNC.COD_FUNC = HOSPEDA.COD_FUNC
+JOIN APARTAMENTO APTO ON HOSPEDA.NUM_AP = APTO.NUM_AP
+JOIN CATEGORIA CAT ON APTO.COD_CAT = CAT.COD_CAT
+JOIN HOSPEDE HOSP ON HOSPEDA.COD_HOSP = HOSP.COD_HOSP
+WHERE HOSP.NOME = 'João' 
+OR CAT.NOME = 'Luxo';
+
+/* Questão 15: O código das hospedagens realizadas pelo hóspede mais velho que se hospedou no 
+apartamento mais caro. 
+*/
+
+SELECT COD_HOSPEDAGEM FROM HOSPEDAGEM
+WHERE COD_HOSP = (
+    SELECT HOSP.COD_HOSP
+    FROM HOSPEDE HOSP
+    JOIN HOSPEDAGEM HOSPEDA ON HOSP.COD_HOSP = HOSPEDA.COD_HOSP
+    JOIN APARTAMENTO APTO ON HOSPEDA.NUM_AP = APTO.NUM_AP
+    JOIN CATEGORIA CAT ON APTO.COD_CAT = CAT.COD_CAT
+    WHERE CAT.PRECO = (
+        SELECT MAX(CAT2.PRECO)
+        FROM CATEGORIA CAT2
+    )
+    ORDER BY HOSP.DT_NASC
+);
+
+
+
