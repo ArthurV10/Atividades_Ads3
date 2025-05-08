@@ -1,0 +1,67 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor LightBlue
+  BorderColor Black
+  FontSize 12
+}
+skinparam actorStyle awesome
+
+' Atores à esquerda
+actor Cliente
+actor Entregador
+
+' Sistema e seguradora à direita
+actor "Companhia de\nSeguros" as Seguradora #lightgoldenrodyellow
+actor "Sistema de\nEntregas" as Sistema #lightgrey
+
+' Casos de uso dentro do sistema
+package "Sistema de Entregas" {
+  
+  package "Autenticação" {
+    usecase "Fazer Login" as UC_Login
+  }
+  
+  package "Gestão de Entregas" {
+    usecase "Registrar Pedido de Entrega" as UC_Registrar
+    usecase "Editar Informação de Entrega" as UC_Editar
+    usecase "Registrar e Acompanhar\nTransporte" as UC_Transporte
+    usecase "Garantir Segurança da Entrega" as UC_Seguranca
+  }
+  
+  package "Seguro / Exceções" {
+    usecase "Marcar Volume como “de valor”" as UC_MarcarValor
+    usecase "Acionar Seguradora"               as UC_AcionarSeg
+    usecase "Notificar Não-Entrega"            as UC_NotifFalha
+    usecase "Notificar Seguradora"             as UC_NotifSeg
+    usecase "Registrar Ocorrência de Cobertura"as UC_RegCobertura
+  }
+
+  ' Include / Extend
+  UC_Registrar .> UC_Login      : «include»
+  UC_Editar    .> UC_Login      : «include»
+  
+  UC_Registrar .> UC_AcionarSeg : «extend»\n[volume “de valor”]
+  UC_Registrar .> UC_NotifFalha : «extend»\n[falha na entrega]
+}
+
+' Ligações da esquerda (exigem login)
+Cliente    --> UC_Registrar
+Cliente    --> UC_Editar
+Entregador --> UC_Registrar
+Entregador --> UC_Seguranca
+
+Cliente    --> UC_MarcarValor
+Cliente    --> UC_Transporte
+Entregador --> UC_Transporte
+
+' Ligações da direita
+Sistema    --> UC_AcionarSeg
+Sistema    --> UC_NotifFalha
+Sistema    --> UC_Transporte
+
+Seguradora --> UC_NotifSeg
+Seguradora --> UC_RegCobertura
+
+@enduml
