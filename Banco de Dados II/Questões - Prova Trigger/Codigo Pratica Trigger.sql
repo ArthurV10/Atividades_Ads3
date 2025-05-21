@@ -26,6 +26,21 @@ CREATE TABLE EMPREGADO_AUDITORIA(
 	SALARIO INT
 );
 
+CREATE TABLE EMPREGADO2 (
+	CODIGO SERIAL PRIMARY KEY,
+	NOME VARCHAR(50),
+	SALARIO FLOAT
+)
+
+CREATE TABLE EMPREGADO2_AUDIT(
+	USUARIO VARCHAR(30),
+	DATA_AUDIT TIMESTAMP,
+	CODIGO INT,
+	COLUNO VARCHAR(50),
+	VALOR_ANTIGO VARCHAR(30),
+	VALOR_NOVO VARCHAR(30)
+)
+
 DROP TABLE FUNCIONARIO;
 
 -- Inserir Valores --
@@ -41,10 +56,16 @@ INSERT INTO EMPREGADO(NOME, SALARIO) VALUES(
 	'Enzo Tchola', 666
 )
 
+INSERT INTO EMPREGADO2(NOME, SALARIO) VALUES
+('XAMA', 3100), ('PIROCA_CARDOSO', 6200), ('ENZO TCHOLÃO', 6666);
+
+
+-- SELECTS --
 SELECT * FROM ALUNO;
 SELECT * FROM FUNCIONARIO;
 SELECT * FROM EMPREGADO;
 SELECT * FROM EMPREGADO_AUDITORIA;
+SELECT * FROM EMPREGADO2_AUDIT;
 
 -- Deletar Valores --
 DELETE FROM EMPREGADO 
@@ -54,6 +75,18 @@ WHERE NOME ILIKE 'Enzo Tchola';
 UPDATE EMPREGADO
 SET SALARIO = 69
 WHERE NOME ILIKE 'Enzo Tchola';
+
+UPDATE EMPREGADO2
+SET SALARIO = 0
+WHERE NOME ILIKE 'ENZO%';
+
+UPDATE EMPREGADO2
+SET CODIGO = 5
+WHERE NOME ILIKE 'ENZO%';
+
+UPDATE EMPREGADO2
+SET NOME = 'ENZO HETERO'
+WHERE NOME ILIKE 'ENZO%';
 
 
 -------------------- Questão 1 -------------------- 
@@ -152,3 +185,68 @@ FOR EACH ROW
 EXECUTE FUNCTION AUDITAR_EMPREGADO()
 ---------------------------------------------------
 
+-------------------- Questão 4 --------------------
+/* Crie a tabela Empregado2 com os atributos 
+- código (serial e chave primária),
+- nome (varchar)
+- salário (integer).
+
+Crie também a tabela Empregado2_audit com os seguintes 
+atributos: 
+- usuário (varchar), 
+- data (timestamp), 
+- id (integer),  
+- coluna (text), 
+- valor_antigo (text), 
+- valor_novo(text).
+
+Agora crie um trigger que não permita a alteração da chave primária e 
+insira registros na tabela Empregado2_audit para refletir as 
+alterações realizadas na tabela Empregado2. */
+
+-- Criando Função --
+/*
+CREATE TABLE EMPREGADO2_AUDIT(
+	USUARIO VARCHAR(30),
+	DATA_AUDIT TIMESTAMP,
+	CODIGO INT,
+	COLUNO VARCHAR(50),
+	VALOR_ANTIGO VARCHAR(30),
+	VALOR_NOVO VARCHAR(30)
+)
+*/
+CREATE OR REPLACE FUNCTION AUDITORIA_EMPREGADO2()
+RETURNS TRIGGER
+AS $$
+BEGIN
+	-- Não permite alteração da chave primaria --
+	IF (OLD.CODIGO != NEW.CODIGO) THEN
+		RAISE EXCEPTION 'Não é permitido alteração da chave primária';
+	END IF;
+	-- Inserir alterações na auditoria sobre salario --
+	IF (OLD.SALARIO != NEW.SALARIO) THEN
+		INSERT INTO EMPREGADO2_AUDIT VALUES(
+			CURRENT_USER, CURRENT_TIMESTAMP, NEW.CODIGO,
+			'SALARIO', OLD.SALARIO::TEXT, NEW.SALARIO::TEXT
+		);
+	END IF;
+	-- Inserir alterações na auditoria sobre nome -- 
+	IF (OLD.NOME != NEW.NOME) THEN
+		INSERT INTO EMPREGADO2_AUDIT VALUES(
+			CURRENT_USER, CURRENT_TIMESTAMP, NEW.CODIGO,
+			'NOME', OLD.NOME, NEW.NOME
+		);
+	END IF;
+	RETURN NEW;
+END;
+$$
+LANGUAGE PLPGSQL;
+
+-- Criando Trigger -- 
+CREATE OR REPLACE TRIGGER TG_AUDITORIA_EMPREGADO2
+BEFORE UPDATE OR INSERT
+ON EMPREGADO2
+FOR EACH ROW
+EXECUTE FUNCTION AUDITORIA_EMPREGADO2();
+
+---------------------------------------------------
