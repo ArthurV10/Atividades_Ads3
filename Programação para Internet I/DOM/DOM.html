@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="DOM.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="titulo-atividade">Exercicios Sobre DOM</h1>
+    <div class="bloco-questao">
+        <h2 class="titulo-questao">Questão 1</h2>
+        <p class="texto-questao">Estude o que é o DOM e a que ele se aplica a partir das seguintes páginas:</p>
+        <p class="topico-questao">a. https://developer.mozilla.org/pt-BR/docs/Web/API/Document_Object_Model/Introduction</p>
+        <p class="topico-questao">b. https://www.w3schools.com/js/js_htmldom.asp</p>
+    </div>
+    <div class="bloco-questao">
+        <h2 class="titulo-questao">Questão 2 / Questão 3</h2>
+        <p class="texto-questao">Crie dois exemplos usando os métodos do objeto document:</p>
+        <p class="topico-questao">a. getElementById();</p>
+        <p class="topico-questao">b. getElementsByTagName();</p>
+
+        <p class="texto-questao">
+            Crie um código que conte o número de parágrafos dentro de uma div e exiba o
+            resultado em uma outra div.
+        </p>
+        <div class="resposta">
+            <div id="letra-a">
+                <button id="botao-alterar" onclick="mudarTexto()">Não Aperte!</button>
+            </div>
+            <div id="letra-b">
+                <button onclick="mostrarParagrafo()">Contar Paragrafo</button>
+                <p id="qtd-paragrafo">Por enquanto sem contagens!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="bloco-questao">
+        <h2 class="titulo-questao">Questão 4</h2>
+        <p class="texto-questao">Crie um segundo botão chamado “limpar” que limpe o conteúdo do texto do parágrafo.</p>
+        <button id="botao-apagar" onclick="limparTexto()">Limpar</button>
+        <div class="resposta">
+            <p>Todo esse texto abaixo será apagado: </p>
+            <p id="paragrafo-apagar">Eu não quero ser apagado :| </p>
+        </div>
+    </div>
+
+    <div class="bloco-questao">
+        <h2 class="titulo-questao">Questão 5</h2>
+        <p class="texto-questao">
+            Qual a diferença entre as propriedades textContent, innerText e innerHTML dos
+            elementos HTML? Cite exemplos.
+        <div class="bloco-respostas">
+            <div class="resposta">
+                <h3>textContent</h3>
+                <div class="explicacao-titulo">
+                    O que faz: 
+                    <p class="explicacao">
+                        Trabalha com todo o texto que existe dentro do elemento, 
+                        inclusive partes que não estão visíveis ou que vêm de elementos filhos. 
+                        Não interpreta nem executa nenhuma tag HTML — trata tudo como texto “puro”
+                    </p>
+                    
+                </div>
+                <div class="exemplo-titulo">
+                    Exemplo(Coletar estatísticas de conteúdo):
+                    <p class="exemplo">
+                        Se você estiver criando uma ferramenta 
+                        de acessibilidade que mede quantos caracteres um artigo possui, usaria textContent 
+                        para garantir que conta cada palavra, até mesmo aquelas em parágrafos ocultos ou dentro de <"span"> escondidos.
+                    </p>
+                </div>
+            </div>
+            <div class="resposta">
+                <h3>innerContent</h3>
+                <div class="explicacao-titulo">
+                    O que faz: 
+                    <p class="explicacao">
+                        Retorna só o texto que está visível para o usuário, 
+                        obedecendo CSS como display: none ou visibility: hidden, 
+                        e respeita quebras de linha causadas por estilos. 
+                        Também não interpreta tags HTML — tudo vira texto simples.
+                    </p> 
+                </div>
+                <div class="exemplo-titulo">
+                    Exemplo(Gerar relatórios de impressão): 
+                    <p class="exemplo">
+                        Em um botão “Imprimir página”, coletar somente o que vai aparecer no papel, 
+                        excluindo menus ou anúncios escondidos por CSS.
+                    </p>
+                </div>
+            </div>
+            <div class="resposta">
+                <h3>innerHTML</h3>
+                <div class="explicacao-titulo">
+                    O que faz:
+                    <p class="explicacao">
+                        Lê ou altera o HTML completo dentro do elemento — ou seja,
+                        interpreta tags, atributos e monta elementos DOM. Permite injetar listas,
+                        links, imagens, etc., diretamente como marcação.
+                    </p> 
+                </div>
+                <div class="exemplo-titulo">
+                    Exemplo(Inserir snippets de anúncio/marketing):
+                    <p class="exemplo">
+                        Carregar banners ou vídeos disponibilizados em HTML por terceiros (sempre validando sanitização).
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="bloco-questao">
+        <h2 class="titulo-questao">Questão 6</h2>
+        <p class="texto-questao">
+            Use um input do tipo color para selecionar a cor manualmente.
+        </p>
+
+        <div class="resposta">
+            <div class="color-container">
+                <label for="colorPicker">Escolha a cor de fundo:</label>
+                <input type="color" id="colorPicker" value="#7f7f7f">
+                <span id="colorValue">#7f7f7f</span>
+            </div>
+
+            <div id="previewBox">
+                Cor de fundo: #7f7f7f
+            </div>
+        </div>
+    </div>
+
+    <div class="bloco-questao">
+        <h2 class="titulo-questao">Questão 7</h2>
+        <p class="texto-questao">
+            Criar um código que copie o conteúdo de uma caixa de texto para outra só que em
+            caixa alta.
+        </p>
+
+        <div class="resposta">
+            <div id="texto-para-copiar">
+                <label for="origem">Texto de Origem:</label>
+                <input type="text" id="origem" placeholder="Digite o texto">
+            </div>
+            <div id="texto-copiado">
+                <label for="destino">Texto em CAIXA ALTA:</label>
+                <input type="text" id="destino" readonly>
+            </div>
+        </div>
+
+    </div>
+        <div class="bloco-questao">
+        <h2 class="titulo-questao">Questão 8</h2>
+        <p class="texto-questao">
+            Cria código que tenha botão de alto contraste que alterne a cor de fundo do body
+            para preto e cor do texto para branco. Adicionalmente, crie um botão para resetar
+            as cores originais.
+        </p>
+
+        <div class="resposta">
+            <div class="grade-botao">
+                <button onclick="alterarModo()">Modo Anos 80(Reverso a cada Clique)</button>
+                <button onclick="resetarCores()">Restaurar Cor padrão</button>
+            </div>
+
+        </div>
+    </div>
+     <script src="script.js"></script>
+</body>
+   
+</html>

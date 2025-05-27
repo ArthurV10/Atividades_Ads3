@@ -1,0 +1,12 @@
+  .color-container {
+    margin: 0.5em 0;
+  }
+  #previewBox {
+    margin-top: 1em;
+    padding: 1em;
+    border: 1px solid #333;
+    text-align: center;
+    justify-content: center;
+    background-color: #7f7f7f;
+    color: #fff;
+  }
