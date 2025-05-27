@@ -1,12 +1,233 @@
-  .color-container {
-    margin: 0.5em 0;
-  }
-  #previewBox {
-    margin-top: 1em;
-    padding: 1em;
-    border: 1px solid #333;
+/* General Body Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* A clean, modern sans-serif font */
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #234f8a; /* Light gray background for the page */
+    color: #000000; /* Dark gray for text, good contrast */
+}
+
+/* Page Title */
+.titulo-atividade {
     text-align: center;
-    justify-content: center;
-    background-color: #7f7f7f;
+    color: #00070e; /* A darker, sophisticated blue */
+    margin-bottom: 30px;
+    border-bottom: 2px solid #030007; /* Blue accent line */
+    padding-bottom: 10px;
+}
+
+/* Question Block Styling */
+.bloco-questao {
+    background-color: #a4f1ff; /* White background for each question block */
+    margin-bottom: 25px;
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.bloco-questao h2.titulo-questao {
+    color: #025b96; /* Blue for question titles */
+    margin-top: 0;
+    border-bottom: 1px solid #eee; /* Light separator line */
+    padding-bottom: 8px;
+}
+
+.texto-questao {
+    margin-bottom: 15px;
+    color: #555; /* Slightly lighter gray for question text */
+}
+
+.topico-questao {
+    margin-left: 20px;
+    margin-bottom: 8px;
+    font-style: italic;
+    color: #777;
+}
+
+/* Styling for the "resposta" divs */
+.resposta {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #e9f5ff; /* Light blue background for answers */
+    border-left: 4px solid #3498db; /* Blue left border for emphasis */
+    border-radius: 0 4px 4px 0; /* Rounded corners on the right side */
+}
+
+/* Styling for the explanation and example blocks in Question 5 */
+.bloco-respostas .resposta {
+    margin-bottom: 15px; /* Space between textContent, innerText, innerHTML blocks */
+}
+
+.bloco-respostas h3 {
+    color: #2980b9; /* Darker blue for subheadings */
+    margin-top: 0;
+}
+
+.explicacao-titulo, .exemplo-titulo {
+    font-weight: bold;
+    margin-top: 10px;
+    color: #333;
+}
+
+.explicacao, .exemplo {
+    margin-left: 15px;
+    color: #444;
+    font-size: 0.95em;
+}
+
+/* Button Styling */
+button {
+    background-color: #3498db; /* Blue background */
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px; /* Rounded corners for buttons */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+button:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
+
+/* Specific button groups */
+.grade-botao {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+    flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+}
+
+/* Input and Label Styling */
+input[type="text"],
+input[type="number"],
+input[type="color"],
+select {
+    padding: 10px;
+    margin: 5px 0 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensures padding doesn't affect overall width */
+    width: calc(100% - 22px); /* Adjust width to account for padding and border */
+    max-width: 300px; /* Max width for inputs */
+}
+
+input[type="color"] {
+    width: 50px;
+    padding: 5px;
+    height: 40px; /* Align height with other inputs */
+}
+
+label {
+    display: block; /* Make labels take up the full width for better spacing */
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Radio button styling */
+div > label > input[type="radio"] {
+    margin-right: 5px;
+    width: auto; /* Don't force radio buttons to full width */
+}
+
+/* Question 6 - Color Picker */
+.color-container {
+    margin: 0.5em 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#colorPicker {
+    margin: 0; /* Reset margin for this specific input */
+}
+
+#colorValue {
+    font-family: monospace;
+}
+
+#previewBox {
+    margin-top: 1em;
+    padding: 1.5em; /* Increased padding */
+    border: 1px solid #555; /* Darker border */
+    text-align: center;
+    background-color: #7f7f7f; /* Default color from your HTML */
     color: #fff;
-  }
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Question 7 - Text copy */
+#texto-para-copiar,
+#texto-copiado {
+    margin-bottom: 15px;
+}
+
+#destino {
+    background-color: #eef; /* Slightly different background for readonly field */
+}
+
+/* Question 10 - Calculator */
+#resultado {
+    margin-top: 15px;
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #2c3e50;
+}
+
+/* Question 11 & 12 - Lists and Selects */
+ul#lista, select#meuSelect {
+    margin-top: 10px;
+    padding-left: 0; /* Remove default padding for ul if desired */
+}
+
+ul#lista li {
+    list-style-type: disc; /* Or use 'none' and style manually */
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+select#meuSelect {
+    display: block; /* Make select take up available width */
+    width: 100%;
+    max-width: 320px; /* Consistent max width */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    .bloco-questao {
+        padding: 15px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+        width: 100%; /* Make inputs full width on smaller screens */
+    }
+
+    .grade-botao {
+        flex-direction: column; /* Stack buttons vertically on small screens */
+    }
+
+    .grade-botao button {
+        width: 100%;
+    }
+
+    .color-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

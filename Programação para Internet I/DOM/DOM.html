@@ -114,7 +114,8 @@
     <div class="bloco-questao">
         <h2 class="titulo-questao">Questão 6</h2>
         <p class="texto-questao">
-            Use um input do tipo color para selecionar a cor manualmente.
+            Crie um exemplo em que uma propriedade CSS de um elemento HTML é alterada
+            via DOM baseada na documentação da página:
         </p>
 
         <div class="resposta">
@@ -149,7 +150,7 @@
         </div>
 
     </div>
-        <div class="bloco-questao">
+    <div class="bloco-questao">
         <h2 class="titulo-questao">Questão 8</h2>
         <p class="texto-questao">
             Cria código que tenha botão de alto contraste que alterne a cor de fundo do body
@@ -164,6 +165,77 @@
             </div>
 
         </div>
+    </div>
+    <div class="bloco-questao">
+        <h2 class="titulo-questao">Questão 9</h2>
+        <p class="texto-questao">
+            Crie um script acionado por botões que aumentem o tamanho do texto de toda a
+            página e outro que faça o contrário.
+        </p>
+    
+        <div class="resposta">
+            <div class="grade-botao">
+                <button onclick="aumentarTexto()">Aumentar Texto</button>
+                <button onclick="diminuirTexto()">Diminuir Texto</button>
+                <button onclick="resetarTexto()">Resetar Texto</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="bloco-questao">
+        <h2 class="titulo-questao">Questão 10</h2>
+        <p class="texto-questao">
+            Crie uma pequena calculadora com as 4 operações. A operação deve ser
+            selecionada de botões de radio. Para isso, teste a propriedade selected
+            para descobrir qual operação está selecionada.
+        </p>
+    
+        <div class="resposta">
+            <input type="number" id="num1" placeholder="Número 1">
+            <input type="number" id="num2" placeholder="Número 2">
+    
+            <div>
+                <label><input type="radio" name="operacao" value="+" checked> Soma</label>
+                <label><input type="radio" name="operacao" value="-"> Subtração</label>
+                <label><input type="radio" name="operacao" value="*"> Multiplicação</label>
+                <label><input type="radio" name="operacao" value="/"> Divisão</label>
+            </div>
+    
+            <button onclick="calcular()">Calcular</button>
+    
+            <p id="resultado"></p>
+        </div>
+    </div>
+
+    <div class="bloco-questao">
+        <h2 class="titulo-questao">Questão 11</h2>
+        <p class="texto-questao">
+            Pesquise como criar elementos e adicione o conteúdo de uma caixa de texto em
+            uma lista não ordenada.
+        </p>
+    
+        <input type="text" id="caixaTexto" placeholder="Digite algo">
+        <button onclick="adicionarNaLista()">Adicionar</button>
+        <button onclick="apagarLista()">Limpar Lista</button>
+    
+        <ul id="lista"></ul>
+    </div>
+
+    <div class="bloco-questao">
+        <h2 class="titulo-questao">Questão 12</h2>
+        <p class="texto-questao">
+            Repita o exercício anterior adicionando o conteúdo da caixa de texto em um
+            elemento de um select.
+        </p>
+
+        <input type="text" id="caixaTextoSelect" placeholder="Digite algo">
+        <button onclick="adicionarNoSelect()">Adicionar</button>
+        <button onclick="apagarNoSelect()">Limpar Lista</button>
+        <br><br>
+
+        <select id="meuSelect">
+            <option disabled selected>Selecione uma opção</option>
+        </select>
     </div>
      <script src="script.js"></script>
 </body>
