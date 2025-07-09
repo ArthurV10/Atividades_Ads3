@@ -1,0 +1,40 @@
+@startuml
+title Diagrama de Atividades - Atendimento Hospitalar
+
+|Paciente|
+start
+:Chega ao Hospital;
+:Realiza Cadastro;
+if (Consulta Agendada?) then (Sim)
+    :Vai para Consulta;
+    |Médico|
+    :Realiza Consulta;
+    if (Exames necessários?) then (Sim)
+        :Solicita Exames;
+        |Paciente|
+        :Realiza Exames;
+        |Médico|
+        :Analisa Exames;
+    else (Não)
+    endif
+    if (Necessita Cirurgia?) then (Sim)
+        |Equipe Hospitalar|
+        :Encaminha para Cirurgia;
+        :Realiza Cirurgia;
+    else (Não)
+        if (Necessita Internação?) then (Sim)
+            :Interna Paciente;
+            |Enfermeiros|
+            :Acompanha Internação;
+        else (Não)
+            |Paciente|
+            :Recebe Orientações e Alta;
+        endif
+    endif
+else (Não)
+    :Orientado sobre procedimentos;
+endif
+|Paciente|
+:Realiza Pagamento via Convênio ou Particular;
+stop
+@enduml

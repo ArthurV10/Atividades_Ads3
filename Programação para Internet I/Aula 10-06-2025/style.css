@@ -1,0 +1,260 @@
+@font-face {
+    font-family: 'Pokemon Solid';
+    src: url('./Font/Pokemon Solid.ttf') format('truetype');
+}
+
+body {
+    font-family: 'Pokemon Solid', sans-serif;
+    padding: 20px;
+    background: linear-gradient(135deg, #87CEEB 0%, #98FB98 50%, #FFE4B5 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: rgb(232, 147, 10);
+    
+    /* Borda preta de 2px para todo o texto */
+    text-shadow:
+        -2px -2px 0 #000,
+         2px -2px 0 #000,
+        -2px  2px 0 #000,
+         2px  2px 0 #000,
+        -2px 0px 0 #000,
+         2px 0px 0 #000,
+         0px -2px 0 #000,
+         0px  2px 0 #000;
+}
+
+h1 {
+    font-family: 'Pokemon Solid', sans-serif;
+    color: #FFD700;
+    font-size: 2.5em;
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow:
+        -3px -3px 0 #000,
+         3px -3px 0 #000,
+        -3px  3px 0 #000,
+         3px  3px 0 #000,
+        -3px 0px 0 #000,
+         3px 0px 0 #000,
+         0px -3px 0 #000,
+         0px  3px 0 #000;
+}
+
+h2 {
+    font-family: 'Pokemon Solid', sans-serif;
+    color: #FF6B6B;
+    background: linear-gradient(90deg, rgba(255, 215, 0, 0.8), rgba(255, 165, 0, 0.8));
+    padding: 10px 15px;
+    border-radius: 25px;
+    display: inline-block;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    margin: 20px 0 15px 0;
+    border: 3px solid #000;
+    text-shadow:
+        -2px -2px 0 #000,
+         2px -2px 0 #000,
+        -2px  2px 0 #000,
+         2px  2px 0 #000,
+        -2px 0px 0 #000,
+         2px 0px 0 #000,
+         0px -2px 0 #000,
+         0px  2px 0 #000;
+}
+
+input {
+    font-family: 'Pokemon Solid', sans-serif;
+    padding: 12px 15px;
+    margin-right: 8px;
+    margin-bottom: 10px;
+    border: 3px solid #4ECDC4;
+    border-radius: 20px;
+    background: linear-gradient(145deg, #ffffff, #f0f8ff);
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.1);
+    font-size: 14px;
+    transition: all 0.3s ease;
+    color: #2C3E50;
+}
+
+input:focus {
+    outline: none;
+    border-color: #FF6B6B;
+    box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+    transform: scale(1.02);
+}
+
+input::placeholder {
+    font-family: 'Pokemon Solid', sans-serif;
+    color: #7B68EE;
+    font-style: normal;
+}
+
+button {
+    font-family: 'Pokemon Solid', sans-serif;
+    padding: 12px 20px;
+    background: linear-gradient(145deg, #FF6B6B, #FF4757);
+    color: #FFD700;
+    border: 3px solid #000;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 6px 12px rgba(255, 107, 107, 0.3);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow:
+        -2px -2px 0 #000,
+         2px -2px 0 #000,
+        -2px  2px 0 #000,
+         2px  2px 0 #000,
+        -2px 0px 0 #000,
+         2px 0px 0 #000,
+         0px -2px 0 #000,
+         0px  2px 0 #000;
+}
+
+button:hover {
+    background: linear-gradient(145deg, #FF4757, #FF3742);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(255, 107, 107, 0.4);
+    color: #FFFFFF;
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 8px rgba(255, 107, 107, 0.3);
+}
+
+table {
+    font-family: 'Pokemon Solid', sans-serif;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: linear-gradient(145deg, #ffffff, #f8f9fa);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    border: 3px solid #000;
+}
+
+th,
+td {
+    font-family: 'Pokemon Solid', sans-serif;
+    padding: 15px;
+    border: 2px solid #000;
+    text-align: left;
+    color: rgb(232, 147, 10);
+    text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000,
+        -1px 0px 0 #000,
+         1px 0px 0 #000,
+         0px -1px 0 #000,
+         0px  1px 0 #000;
+}
+
+th {
+    background: linear-gradient(135deg, #4ECDC4, #44A08D);
+    color: #FFD700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow:
+        -2px -2px 0 #000,
+         2px -2px 0 #000,
+        -2px  2px 0 #000,
+         2px  2px 0 #000,
+        -2px 0px 0 #000,
+         2px 0px 0 #000,
+         0px -2px 0 #000,
+         0px  2px 0 #000;
+}
+
+/* Zebragem com cores Pokemon */
+tr:nth-child(even) {
+    background: linear-gradient(90deg, rgba(255, 228, 225, 0.8), rgba(240, 248, 255, 0.8));
+}
+
+tr:nth-child(odd) {
+    background: linear-gradient(90deg, rgba(240, 255, 255, 0.8), rgba(255, 248, 220, 0.8));
+}
+
+tr:hover {
+    background: linear-gradient(90deg, rgba(255, 215, 0, 0.6), rgba(255, 165, 0, 0.6));
+    transform: scale(1.01);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Estilo para os divs de resultado */
+div[id^="resultado"] {
+    font-family: 'Pokemon Solid', sans-serif;
+    margin: 15px 0;
+    padding: 15px;
+    background: linear-gradient(145deg, rgba(232, 244, 253, 0.9), rgba(255, 240, 245, 0.9));
+    border-radius: 15px;
+    border: 3px solid #4ECDC4;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    min-height: 20px;
+    color: rgb(232, 147, 10);
+    text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000,
+        -1px 0px 0 #000,
+         1px 0px 0 #000,
+         0px -1px 0 #000,
+         0px  1px 0 #000;
+}
+
+/* Estilo especial para parágrafos criados dinamicamente */
+p {
+    font-family: 'Pokemon Solid', sans-serif;
+    color: rgb(232, 147, 10);
+    margin: 10px 0;
+    padding: 10px;
+    background: linear-gradient(90deg, rgba(255, 228, 181, 0.8), rgba(240, 230, 140, 0.8));
+    border-radius: 10px;
+    border: 2px solid #FF6B6B;
+    text-shadow:
+        -2px -2px 0 #000,
+         2px -2px 0 #000,
+        -2px  2px 0 #000,
+         2px  2px 0 #000,
+        -2px 0px 0 #000,
+         2px 0px 0 #000,
+         0px -2px 0 #000,
+         0px  2px 0 #000;
+}
+
+/* Grid elements (caso você use) */
+#gride-elements {
+    font-family: 'Pokemon Solid', sans-serif;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 15px 20px;
+    align-items: center;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+    border: 3px solid #FFD700;
+}
+
+/* Adiciona um efeito de brilho sutil */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(78, 205, 196, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+}

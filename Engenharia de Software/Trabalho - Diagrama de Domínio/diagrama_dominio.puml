@@ -1,0 +1,192 @@
+@startuml
+' Configurações de aparência (opcional)
+hide empty members
+skinparam linetype ortho
+skinparam classAttributeIconSize 0
+skinparam defaultFontName Arial
+skinparam shadowing false
+skinparam note μεγάλη γραμματοσειρά
+
+title Diagrama de Domínio: Hospital (Baseado na Descrição Textual)
+
+' Definição de Enums para tipos controlados
+enum TipoSala {
+  CIRURGIA
+  CONSULTORIO
+  APARTAMENTO
+  ENFERMARIA
+  SALA_EXAME
+  OUTRO_TIPO_SALA
+}
+
+enum FormaPagamentoProcedimento {
+  CONVENIO
+  PARTICULAR
+}
+
+enum NivelEnfermeiro {
+    AUXILIAR
+    TECNICO
+    PADRAO
+}
+
+enum TipoEquipe {
+    CIRURGICA
+    PLANTAO
+    ATENDIMENTO_GERAL
+    OUTRA_EQUIPE
+}
+
+' Definição das Classes (Entidades)
+class Hospital {
+  +Nome : String
+  +Endereco : String
+}
+
+class Setor {
+  +NomeSetor : String
+  +CodigoSetor : String
+}
+
+class Sala {
+  +NumeroSala : String
+  +DescricaoLocalizacao : String
+  +Tipo : TipoSala
+}
+
+abstract class Funcionario {
+  +NomeFuncionario : String
+  +Matricula : String
+  +CargoGeral : String
+}
+
+class Medico extends Funcionario {
+  +Especialidade : String
+  +CRM : String
+}
+
+class Enfermeiro extends Funcionario {
+  +COREN : String
+  +Nivel : NivelEnfermeiro
+}
+
+class PessoalAdministrativo extends Funcionario {
+  +Departamento : String
+  +FuncaoEspecifica : String
+}
+
+class Equipe {
+  +NomeEquipe : String
+  +Tipo : TipoEquipe
+}
+
+class Paciente {
+  +NomePaciente : String
+  +IDPaciente : String
+  +DataNascimento : Date
+  +Contato : String
+}
+
+abstract class Procedimento {
+  +IDProcedimento : String
+  +DataHoraRealizacao : DateTime
+  +FormaPagamento : FormaPagamentoProcedimento
+  +DescricaoGeral : String
+}
+
+class Cirurgia extends Procedimento {
+  +TipoCirurgia : String
+  +Observacoes : String
+  +DuracaoPrevista : String
+}
+
+class Internacao extends Procedimento {
+  +DataEntrada : DateTime
+  +DataPrevistaSaida : DateTime
+  +Leito : String
+  +PrescricaoMedicaGeral : String
+  +DietaEspecifica : String
+}
+
+class Consulta extends Procedimento {
+  +Diagnostico : String
+  +ExamesSolicitadosDescricao : String
+  +ReceitaMedicaDescricao : String
+}
+
+class Exame extends Procedimento {
+  +TipoExameEspecifico : String
+  +ResultadosExame : String
+  +DataSolicitacao : Date
+  +DataResultado : Date
+}
+
+class OutrosProcedimentos extends Procedimento {
+    +TipoOutroProcedimento : String
+    +Detalhes : String
+}
+
+class Convenio {
+    +NomeConvenio : String
+    +CodigoConvenio : String
+    +CNPJ : String
+    +Plano : String
+}
+
+' --- Relacionamentos ---
+
+Hospital "1" -- "1..*" Setor : "Possui"
+
+' Setor pode ser composto por sub-setores (auto-relacionamento)
+Setor "1" -- "0..*" Setor : "Contém > \n(sub-setor)"
+
+' Cada setor é dividido em salas
+Setor "1" -- "1..*" Sala : "É dividido em"
+
+' Funcionários trabalham em setores
+Funcionario "0..*" -- "1" Setor : "Trabalha em"
+
+
+' Equipes são compostas por médicos e enfermeiros, com um médico supervisor
+Equipe "1" -- "1" Medico : "É Supervisionada por > \n(Supervisor da Equipe)"
+Equipe "1" o-- "1..*" Medico : "Contém Membro Médico"
+Equipe "1" o-- "0..*" Enfermeiro : "Contém Membro Enfermeiro"
+
+
+' Pacientes são submetidos a procedimentos
+Paciente "1" -- "0..*" Procedimento : "É Submetido a"
+
+' Procedimentos são pagos por convênios ou particular
+' (FormaPagamento é atributo, mas pode haver link para Convênio)
+Procedimento "0..*" -- "0..1" Convenio : "É Pago por \n(se convênio)"
+
+
+' --- Detalhes dos Tipos de Procedimentos e suas associações ---
+
+' Cirurgias: ocupando salas de cirurgia com equipe médica responsável
+Cirurgia "1" -- "1" Sala : "Ocupa (Sala de Cirurgia)\n[Sala.Tipo = CIRURGIA]"
+Cirurgia "1" -- "1" Equipe : "Realizada por (Equipe Médica)\n[Equipe.Tipo = CIRURGICA]"
+
+' Internações: ocupando enfermarias ou quartos e com tratamento prescrito
+Internacao "1" -- "1" Sala : "Ocupa (Enfermaria/Quarto)\n[Sala.Tipo = ENFERMARIA ou APARTAMENTO]"
+
+' Consultas: com atributos, ocupando consultórios e com médico responsável
+Consulta "1" -- "1" Sala : "Ocupa (Consultório)\n[Sala.Tipo = CONSULTORIO]"
+Consulta "1" -- "1" Medico : "Realizada por (Médico Responsável)"
+
+' Exames: solicitados em consultas médicas, registrando os resultados
+Consulta "1" -- "0..*" Exame : "Solicita >"
+Exame "1" ..> "1" Consulta : "É Solicitado em" ' Ligação para indicar origem do pedido
+
+
+' --- Notas Adicionais ---
+note top of Hospital
+  **Diagrama de Domínio do Sistema Hospitalar**
+  Este diagrama reflete a estrutura e os relacionamentos descritos
+  para a modelagem de um hospital.
+end note
+
+note "Definir novos requisitos para o sistema" as SystemRequirementsText
+Hospital .. SystemRequirementsText : "Considerar para evolução \n(conforme item original)"
+
+@enduml

@@ -1,0 +1,40 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam actorStyle awesome
+
+actor Operadora as "Operadora"
+actor Profissional as "Profissional"
+
+rectangle "Sistema de Gestão Hospitalar" {
+  usecase (Cadastrar Operadoras) as UC1 #LightGreen
+  usecase (Cadastrar Estabelecimentos) as UC2 #LightGreen
+  usecase (Cadastrar Clientes) as UC3 #LightGreen
+  usecase (Cadastrar Profissionais) as UC4 #LightGreen
+  usecase (Cadastrar Procedimentos) as UC5 #LightGreen
+  usecase (Cadastrar Convênios) as UC6 #LightGreen
+  usecase (Cadastrar Especialidades) as UC7 #LightGreen
+  usecase (Agendar Atendimento) as UC8 #LightYellow
+  usecase (Emitir Relatórios) as UC9 #LightBlue
+  usecase (Consultar Agenda) as UC10 #LightYellow
+  usecase (Informar Horario de Trabalho) as UC11 #LightYellow
+  usecase (Realizar Atendimento) as UC12 #LightYellow
+
+  Operadora --|> UC1
+  Operadora --|> UC2
+  Operadora --|> UC3
+  Operadora --|> UC4
+  Operadora --|> UC5
+  Operadora --|> UC6
+  Operadora --|> UC7
+  Operadora --|> UC8
+  Operadora --|> UC9
+  Operadora --|> UC10
+
+  Profissional --|> UC9
+  Profissional --|> UC10
+  Profissional --|> UC11
+  Profissional --|> UC12
+}
+
+@enduml
