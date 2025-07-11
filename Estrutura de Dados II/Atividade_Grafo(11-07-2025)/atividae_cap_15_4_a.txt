@@ -1,0 +1,3 @@
+Não, pois sua busca não percorre o caminho mais curto que encontra, 
+ele apenas segue um caminho e no momento onde para visita seus vizinhos
+para ver se pode continuar seguindo

@@ -1,0 +1,5 @@
+O BFS funciona como procurar alguém num prédio: 
+ele checa todas as salas do 1º andar antes de subir pro 2º, 
+e todas do 2º antes de ir pro 3º. Por avançar assim, camada 
+por camada e sem pular andares, o primeiro caminho que ele 
+encontra para qualquer "sala" (nó) é, com certeza, o mais curto.
