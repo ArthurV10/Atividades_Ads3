@@ -1,0 +1,86 @@
+@startuml
+' Título do Diagrama
+title Diagrama de Domínio - Posto de Combustível
+
+' --- Configurações de Aparência ---
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam shadowing true
+skinparam package {
+    BorderColor #2D3748
+    BackgroundColor #F7FAFC
+    ArrowColor #4A5568
+    FontColor #2D3748
+}
+skinparam class {
+    BorderColor #4299E1
+    BackgroundColor #EBF8FF
+    ArrowColor #3182CE
+}
+hide empty members
+
+' --- Pacote para o Domínio Operacional ---
+package "Domínio Operacional" {
+    class Funcionario {
+      + codigo: String
+      + nome: String
+      + turno: String
+      + status: String
+    }
+
+    class Bomba {
+      + id: Number
+      + nome: String
+      + status: String
+      + combustiveisDisponiveis: Array
+      + combustivelSelecionado: String
+      + quantidadeAtual: Number
+      + valorAtual: Number
+      + metaQuantidade: Number
+      + estaPausada: Boolean
+    }
+
+    class EstoqueCombustivel {
+      + tipo: String
+      + nivelAtual: Number
+      + capacidadeMaxima: Number
+      + preco: Number
+      + alertaEstoqueBaixo: Number
+    }
+}
+
+' --- Pacote para o Domínio de Análise e Registro ---
+package "Domínio de Análise e Registro" {
+    class Transacao {
+      + id: String
+      + timestamp: Date
+      + status: String
+      + quantidade: Number
+      + valor: Number
+    }
+
+    class Relatorio {
+      + data: Date
+      + resumo: Object
+      + detalhamentoPorCombustivel: Object
+      + detalhamentoPorFuncionario: Object
+      + detalhamentoPorBomba: Object
+    }
+}
+
+' --- Definição dos Relacionamentos entre as entidades ---
+
+' Relacionamentos dentro do pacote Operacional
+Funcionario "1" -- "0..1" Bomba : opera >
+Bomba "1" -- "1..*" EstoqueCombustivel : utiliza >
+
+' Relacionamentos que cruzam os pacotes
+Bomba "1" --> "*" Transacao : registra >
+Funcionario "1" --> "*" Transacao : realiza >
+Transacao "*" --> "1" EstoqueCombustivel : refere-se a >
+
+' Relacionamentos dentro do pacote de Análise
+Relatorio "1" o-- "*" Transacao : é gerado de >
+
+
+@enduml

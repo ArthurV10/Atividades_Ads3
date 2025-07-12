@@ -1,0 +1,46 @@
+@startuml
+' Título do Diagrama
+title Diagrama de Caso de Uso - Posto de Combustível
+
+' Direção e estilo
+left to right direction
+skinparam packageStyle rectangle
+
+' Definição dos Atores
+actor Frentista
+actor Gerente
+
+' Fronteira do Sistema
+rectangle "Sistema de Gerenciamento" {
+  ' --- Casos de Uso do Frentista ---
+  usecase UC1 as "Operar Bomba de
+  Combustível"
+
+  ' --- Casos de Uso do Gerente ---
+  usecase UC2 as "Gerenciar Cadastro
+  de Funcionários"
+  usecase UC3 as "Gerenciar Estoque
+  e Preços"
+  usecase UC4 as "Gerar Relatório
+  Diário"
+  usecase UC5 as "Consultar Histórico
+  de Transações"
+  usecase UC6 as "Exportar Relatório"
+}
+
+' --- Relacionamentos (Associações) ---
+
+' O Frentista opera a bomba
+Frentista -- UC1
+
+' O Gerente tem acesso às funções administrativas
+Gerente -- UC2
+Gerente -- UC3
+Gerente -- UC4
+Gerente -- UC5
+
+' O Gerente pode, opcionalmente, exportar um relatório após gerá-lo
+UC6 .> UC4 : <<extend>>
+
+
+@enduml
